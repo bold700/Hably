@@ -11,14 +11,9 @@ import {
   Chip,
 } from "@mui/material";
 import { formatDate } from "@/utils/dateHelpers";
+import { DailyCheckIn, WeeklyReview, MonthlyReview } from "@/types";
 
-interface ReviewItem {
-  id: string;
-  date: string;
-  title?: string;
-  score?: number;
-  [key: string]: any;
-}
+type ReviewItem = DailyCheckIn | WeeklyReview | MonthlyReview;
 
 interface ReviewListProps {
   reviews: ReviewItem[];
@@ -35,7 +30,9 @@ export default function ReviewList({ reviews, type }: ReviewListProps) {
   }
 
   const sortedReviews = [...reviews].sort((a, b) => {
-    return new Date(b.date || b.createdAt).getTime() - new Date(a.date || a.createdAt).getTime();
+    const dateA = "date" in a ? a.date : "weekStartDate" in a ? a.weekStartDate : "month" in a ? a.createdAt : a.createdAt;
+    const dateB = "date" in b ? b.date : "weekStartDate" in b ? b.weekStartDate : "month" in b ? b.createdAt : b.createdAt;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
   });
 
   return (
@@ -47,15 +44,15 @@ export default function ReviewList({ reviews, type }: ReviewListProps) {
               primary={
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <Typography variant="body1">
-                    {type === "daily" && review.date
+                    {type === "daily" && "date" in review
                       ? formatDate(review.date)
-                      : type === "weekly" && review.weekStartDate
+                      : type === "weekly" && "weekStartDate" in review
                       ? `${formatDate(review.weekStartDate)} - ${formatDate(review.weekEndDate)}`
-                      : type === "monthly" && review.month
+                      : type === "monthly" && "month" in review
                       ? review.month
                       : formatDate(review.createdAt)}
                   </Typography>
-                  {review.score !== undefined && (
+                  {"score" in review && review.score !== undefined && (
                     <Chip
                       label={`Score: ${review.score}/10`}
                       size="small"
@@ -63,7 +60,7 @@ export default function ReviewList({ reviews, type }: ReviewListProps) {
                       variant="tonal"
                     />
                   )}
-                  {review.progressScore !== undefined && (
+                  {"progressScore" in review && review.progressScore !== undefined && (
                     <Chip
                       label={`Voortgang: ${review.progressScore}/10`}
                       size="small"
@@ -74,15 +71,15 @@ export default function ReviewList({ reviews, type }: ReviewListProps) {
                 </Box>
               }
               secondary={
-                review.title || (
+                "title" in review && review.title || (
                   <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                    {type === "daily" && review.mindset?.oneThingToday && (
+                    {type === "daily" && "mindset" in review && review.mindset?.oneThingToday && (
                       <>📌 {review.mindset.oneThingToday}</>
                     )}
-                    {type === "weekly" && review.wins && (
+                    {type === "weekly" && "wins" in review && review.wins && (
                       <>✅ {review.wins.substring(0, 100)}...</>
                     )}
-                    {type === "monthly" && review.proudOf && (
+                    {type === "monthly" && "proudOf" in review && review.proudOf && (
                       <>✨ {review.proudOf.substring(0, 100)}...</>
                     )}
                   </Typography>
