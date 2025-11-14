@@ -147,6 +147,7 @@ export const theme = createTheme({
     "0px 64px 4px 0px rgba(0, 0, 0, 0.3), 0px 72px 136px 68px rgba(0, 0, 0, 0.15)",
     "0px 68px 4px 0px rgba(0, 0, 0, 0.3), 0px 76px 144px 72px rgba(0, 0, 0, 0.15)",
     "0px 72px 4px 0px rgba(0, 0, 0, 0.3), 0px 80px 152px 76px rgba(0, 0, 0, 0.15)",
+    "0px 76px 4px 0px rgba(0, 0, 0, 0.3), 0px 84px 160px 80px rgba(0, 0, 0, 0.15)",
   ],
   components: {
     MuiButton: {
