@@ -57,7 +57,7 @@ export default function ReviewList({ reviews, type }: ReviewListProps) {
                       label={`Score: ${review.score}/10`}
                       size="small"
                       color="primary"
-                      variant="tonal"
+                      variant="outlined"
                     />
                   )}
                   {"progressScore" in review && review.progressScore !== undefined && (
@@ -65,7 +65,7 @@ export default function ReviewList({ reviews, type }: ReviewListProps) {
                       label={`Voortgang: ${review.progressScore}/10`}
                       size="small"
                       color="primary"
-                      variant="tonal"
+                      variant="outlined"
                     />
                   )}
                 </Box>

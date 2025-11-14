@@ -31,7 +31,7 @@ export default function HabitList({ habits }: HabitListProps) {
               label={habit.frequency === "daily" ? "Dagelijks" : "Wekelijks"}
               size="small"
               color="primary"
-              variant="tonal"
+              variant="outlined"
             />
           </Box>
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
