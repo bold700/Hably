@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:static": "NEXT_PUBLIC_STATIC_EXPORT=true next build"
   },
   "dependencies": {
     "@mui/material": "^6.1.0",
