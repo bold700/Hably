@@ -30,28 +30,21 @@ export default function ReviewList({ reviews, type }: ReviewListProps) {
   }
 
   const sortedReviews = [...reviews].sort((a, b) => {
-    let dateA: string;
-    let dateB: string;
+    const getDate = (review: ReviewItem): string => {
+      if ("date" in review) {
+        return review.date;
+      }
+      if ("weekStartDate" in review) {
+        return review.weekStartDate;
+      }
+      if ("month" in review) {
+        return review.createdAt;
+      }
+      return review.createdAt;
+    };
     
-    if ("date" in a) {
-      dateA = a.date;
-    } else if ("weekStartDate" in a) {
-      dateA = a.weekStartDate;
-    } else if ("month" in a) {
-      dateA = a.createdAt;
-    } else {
-      dateA = a.createdAt;
-    }
-    
-    if ("date" in b) {
-      dateB = b.date;
-    } else if ("weekStartDate" in b) {
-      dateB = b.weekStartDate;
-    } else if ("month" in b) {
-      dateB = b.createdAt;
-    } else {
-      dateB = b.createdAt;
-    }
+    const dateA = getDate(a);
+    const dateB = getDate(b);
     
     return new Date(dateB).getTime() - new Date(dateA).getTime();
   });
