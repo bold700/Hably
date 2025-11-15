@@ -478,22 +478,24 @@ export default function WizardPage() {
         activeStep={activeStep}
         completed={completed}
       >
-        {renderStepContent()}
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-          <Button
-            disabled={activeStep === 0}
-            onClick={handleBack}
-            startIcon={<ArrowBack />}
-          >
-            Terug
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleNext}
-            endIcon={activeStep === steps.length - 1 ? undefined : <ArrowForward />}
-          >
-            {activeStep === steps.length - 1 ? "Voltooien" : "Volgende"}
-          </Button>
+        <Box>
+          {renderStepContent()}
+          <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+            <Button
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              startIcon={<ArrowBack />}
+            >
+              Terug
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleNext}
+              endIcon={activeStep === steps.length - 1 ? undefined : <ArrowForward />}
+            >
+              {activeStep === steps.length - 1 ? "Voltooien" : "Volgende"}
+            </Button>
+          </Box>
         </Box>
       </CustomStepper>
     </Container>
