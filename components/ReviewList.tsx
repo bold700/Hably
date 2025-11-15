@@ -32,15 +32,13 @@ export default function ReviewList({ reviews, type }: ReviewListProps) {
   const sortedReviews = [...reviews].sort((a, b) => {
     const getDate = (review: ReviewItem): string => {
       if ("date" in review) {
-        return review.date;
+        return (review as DailyCheckIn).date;
       }
       if ("weekStartDate" in review) {
-        return review.weekStartDate;
+        return (review as WeeklyReview).weekStartDate;
       }
-      if ("month" in review) {
-        return review.createdAt;
-      }
-      return review.createdAt;
+      // MonthlyReview heeft altijd createdAt
+      return (review as MonthlyReview).createdAt;
     };
     
     const dateA = getDate(a);
