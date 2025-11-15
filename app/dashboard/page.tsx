@@ -12,10 +12,11 @@ import {
 import { Add as AddIcon } from "@mui/icons-material";
 import { getGoals } from "@/utils/storage";
 import GoalCard from "@/components/GoalCard";
+import { BigGoal } from "@/types";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [goals, setGoals] = React.useState<any[]>([]);
+  const [goals, setGoals] = React.useState<BigGoal[]>([]);
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
